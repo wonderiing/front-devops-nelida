@@ -65,6 +65,9 @@ const handleLogin = async () => {
       localStorage.setItem('token', token)
       localStorage.setItem('username', email.value)
       localStorage.setItem('superuser', true)
+
+      window.dispatchEvent(new Event('storage'))
+
       router.replace({ name: 'admin' }) // Redirigir al panel de administración si es superusuario
     } else {
       error.value = "No tienes permisos de administrador."

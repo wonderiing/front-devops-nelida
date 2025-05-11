@@ -3,16 +3,12 @@
     <div class="navbar-container">
       <div class="navbar-logo">WNDR</div>
       <ul class="navbar-links">
-        <li><RouterLink :to="{name: 'balance'}" class="nav-link">Balance</RouterLink></li>
-        <li><RouterLink :to="{name: 'reservas'}" class="nav-link">Reservas</RouterLink></li>
-        <li><RouterLink :to="{name: 'airbnbs'}" class="nav-link">Ver Airbnbs</RouterLink></li>
-
-        <!-- Solo se muestra si el usuario es superuser -->
-        <li v-if="isSuperUser">
-          <RouterLink :to="{name: 'admin-log'}" class="nav-link">Admin</RouterLink>
-        </li>
-
-        <li><a @click="deleteToken" class="nav-link">Logout</a></li>
+        <li><RouterLink :to="{ name: 'balance' }" class="nav-link">Balance</RouterLink></li>
+        <li><RouterLink :to="{ name: 'reservas' }" class="nav-link">Reservas</RouterLink></li>
+        <li><RouterLink :to="{ name: 'airbnbs' }" class="nav-link">Ver Airbnbs</RouterLink></li>
+        <!-- Mostrar solo si es superusuario -->
+        <li v-if="isSuperUser"><RouterLink :to="{ name: 'admin' }" class="nav-link">Admin</RouterLink></li>
+        <li><a @click="deleteToken()" class="nav-link">Logout</a></li>
       </ul>
     </div>
   </nav>
@@ -20,13 +16,21 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 
 const isSuperUser = ref(localStorage.getItem('superuser') === 'true')
+const router = useRouter()
 
 const updateSuperUser = () => {
   isSuperUser.value = localStorage.getItem('superuser') === 'true'
+}
+
+const deleteToken = () => {
+  localStorage.removeItem('token')
+  localStorage.removeItem('username')
+  localStorage.removeItem('superuser')
+  updateSuperUser()
+  router.replace({ name: 'home' })
 }
 
 onMounted(() => {
@@ -37,16 +41,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('storage', updateSuperUser)
 })
-
-const router = useRouter()
-
-const deleteToken = () => {
-  localStorage.removeItem('token')
-  localStorage.removeItem('username')
-  localStorage.removeItem('superuser')
-  updateSuperUser() 
-  router.replace({ name: 'home' })
-}
 </script>
 
 <style scoped>
