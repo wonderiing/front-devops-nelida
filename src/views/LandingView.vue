@@ -11,6 +11,7 @@
           <li><a href="#propiedades">Propiedades</a></li>
           <li><a href="#experiencias">Experiencias</a></li>
           <li><a href="#contacto">Contacto</a></li>
+          <li><RouterLink :to="{name: 'admin-log'}" href="#contacto">Login Admin</RouterLink></li>
         </ul>
       </nav>
       <div class="auth-buttons">

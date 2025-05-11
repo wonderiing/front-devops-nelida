@@ -1,26 +1,52 @@
 <template>
   <nav class="navbar">
     <div class="navbar-container">
-      <div class="navbar-logo">AirbnbApp</div>
+      <div class="navbar-logo">WNDR</div>
       <ul class="navbar-links">
         <li><RouterLink :to="{name: 'balance'}" class="nav-link">Balance</RouterLink></li>
         <li><RouterLink :to="{name: 'reservas'}" class="nav-link">Reservas</RouterLink></li>
         <li><RouterLink :to="{name: 'airbnbs'}" class="nav-link">Ver Airbnbs</RouterLink></li>
+
+        <!-- Solo se muestra si el usuario es superuser -->
+        <li v-if="isSuperUser">
+          <RouterLink :to="{name: 'admin-log'}" class="nav-link">Admin</RouterLink>
+        </li>
+
+        <li><a @click="deleteToken" class="nav-link">Logout</a></li>
       </ul>
-      <div class="user-info">
-        <span v-if="username">Hola, {{ username }}</span>
-        <span v-else>Usuario no identificado</span>
-      </div>
     </div>
   </nav>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { RouterLink } from 'vue-router';
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { RouterLink } from 'vue-router'
 
-// Recuperar el nombre de usuario del localStorage
-const username = ref(localStorage.getItem('username') || null);
+const isSuperUser = ref(localStorage.getItem('superuser') === 'true')
+
+const updateSuperUser = () => {
+  isSuperUser.value = localStorage.getItem('superuser') === 'true'
+}
+
+onMounted(() => {
+  updateSuperUser()
+  window.addEventListener('storage', updateSuperUser)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('storage', updateSuperUser)
+})
+
+const router = useRouter()
+
+const deleteToken = () => {
+  localStorage.removeItem('token')
+  localStorage.removeItem('username')
+  localStorage.removeItem('superuser')
+  updateSuperUser() 
+  router.replace({ name: 'home' })
+}
 </script>
 
 <style scoped>

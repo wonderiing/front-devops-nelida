@@ -5,6 +5,8 @@ import RegisterView from '@/views/Auth/RegisterView.vue'
 import MyReservations from '@/views/MyReservations.vue'
 import MyBalance from '@/views/MyBalance.vue'
 import LandingView from '@/views/LandingView.vue'
+import AdminDashboard from '@/views/Admin/AdminDashboard.vue'
+import LoginAdmin from '@/views/Admin/LoginAdmin.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +41,16 @@ const router = createRouter({
       path: '/balance',
       name: 'balance',
       component: MyBalance
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminDashboard
+    },
+    {
+      path: '/admin-log',
+      name: 'admin-log',
+      component: LoginAdmin
     }
   ]
 })
