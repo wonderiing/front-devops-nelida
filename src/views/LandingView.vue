@@ -3,7 +3,7 @@
     <!-- Header -->
     <header class="header">
       <div class="logo-container">
-        <h1 class="logo">WNDR</h1>
+        <h1 class="logo">JustLikeHome</h1>
       </div>
       <nav class="navigation">
         <ul class="nav-links">
@@ -194,7 +194,7 @@
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-col">
-          <h3>StayEasy</h3>
+          <h3>JustLikeHome</h3>
           <p>Tu portal de confianza para encontrar los mejores alojamientos en todo el mundo.</p>
           <div class="social-icons">
             <a href="#" class="social-icon">FB</a>
@@ -223,7 +223,7 @@
         <div class="footer-col">
           <h3>Contacto</h3>
           <ul>
-            <li>info@stayeasy.com</li>
+            <li>info@justlikehome.com</li>
             <li>+34 912 345 678</li>
             <li>Calle Gran Vía 123, Madrid</li>
           </ul>
