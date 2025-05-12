@@ -1,6 +1,6 @@
 # front-nelida
 
-This template should help get you started developing with Vue 3 in Vite.
+Proyecto para mi clase de devops - FronteEnd
 
 ## Recommended IDE Setup
 
